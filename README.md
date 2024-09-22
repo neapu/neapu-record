@@ -22,6 +22,10 @@ npm install
 npm run dev
 ```
 
-Then access IP:7001 to proceed.
+Then, visit `IP:7001` to open the console page.
 
-然后访问`IP:7001`即可。
+然后访问`IP:7001`即可打开控制台页面。
+
+## About console page
+
+[neapu-record-web](https://github.com/neapu/neapu-record-web)
