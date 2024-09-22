@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc && node dist/index.js"
+    "dev": "tsc && node dist/index.js",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
