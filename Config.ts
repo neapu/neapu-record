@@ -8,9 +8,16 @@ class Config {
     private saveDir: string = '';
 
     constructor() {
-        db.getData('/config/saveDir').then((saveDir: string) => {
-            this.saveDir = saveDir;
-        }).catch(err => {
+        db.exists('/config/saveDir').then((ret: boolean)=>{
+            if (ret) {
+                db.getData('/config/saveDir').then((saveDir: string) => {
+                    this.saveDir = saveDir;
+                })
+            } else {
+                return db.push('/config/saveDir', '', true);
+            }
+        })
+        .catch(err => {
             logger.error(err);
         });
     }

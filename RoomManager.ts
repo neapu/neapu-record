@@ -9,23 +9,30 @@ class RoomManager {
     private checkTimer: NodeJS.Timeout | null = null;
 
     constructor() {
-        db.getData('/rooms').then((rooms: string[]) => {
-            rooms.forEach(roomId => {
-                const room = new Room(roomId);
-                try {
-                    room.init().then(() => {
-                        this.rooms.push(room);
+        db.exists('/rooms').then(ret=>{
+            if (ret) {
+                db.getData('/rooms').then((rooms: string[]) => {
+                    rooms.forEach(roomId => {
+                        const room = new Room(roomId);
+                        try {
+                            room.init().then(() => {
+                                this.rooms.push(room);
+                            });
+                        } catch (err) {
+                            logger.error(err);
+                        }
                     });
-                } catch (err) {
-                    logger.error(err);
-                }
-            });
-
-            this.checkTimer = setInterval(() => {
-                this.checkRooms();
-            }, this.checkInterval);
-            this.checkRooms();
-        }).catch(err=>{
+        
+                    this.checkTimer = setInterval(() => {
+                        this.checkRooms();
+                    }, this.checkInterval);
+                    this.checkRooms();
+                })
+            } else {
+                return db.push('/rooms', [], true);
+            }
+        })
+        .catch(err=>{
             logger.error(err);
         })
     }
