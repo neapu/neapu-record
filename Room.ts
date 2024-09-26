@@ -178,6 +178,7 @@ export class Room {
     }
 
     async check() {
+        logger.info('start check.', this.roomId);
         if (this.listening && !this.recording) {
             await this.requestRoomInfo();
             if (this.liveStatus) {

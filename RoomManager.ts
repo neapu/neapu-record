@@ -65,6 +65,7 @@ class RoomManager {
     }
 
     checkRooms() {
+        logger.info('check rooms.');
         this.rooms.forEach(room => {
             room.check();
         });
