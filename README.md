@@ -26,6 +26,20 @@ Then, visit `IP:7001` to open the console page.
 
 然后访问`IP:7001`即可打开控制台页面。
 
+## Docker
+
+创建容器
+
+```shell
+docker build --build-arg USER_UID=$(id -u) -t neapu_record .
+```
+
+运行容器
+
+```shell
+docker run -v /local/path:/app/record -p 7001:7001 -d neapu_record
+```
+
 ## About console page
 
 [neapu-record-web](https://github.com/neapu/neapu-record-web)

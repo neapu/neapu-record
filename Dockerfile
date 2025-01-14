@@ -1,7 +1,5 @@
 FROM ubuntu:22.04
 
-WORKDIR /app
-
 RUN apt update
 
 RUN apt install nodejs npm curl ca-certificates -y
@@ -12,6 +10,16 @@ RUN n stable
 
 RUN apt install ffmpeg -y
 
+RUN npm install typescript -g
+
+ARG USER_UID=1000
+
+RUN useradd -r -u ${USER_UID} -m -d /app record
+
+USER record
+
+WORKDIR /app
+
 COPY *.ts *.json /app/
 
 COPY static /app/static
@@ -20,7 +28,7 @@ EXPOSE 7001
 
 RUN npm install
 
-RUN npm install typescript -g
+
 
 RUN tsc
 
