@@ -6,3 +6,4 @@ record/
 .idea/
 temp/
 web/
+yarn.lock
