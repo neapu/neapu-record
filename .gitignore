@@ -4,3 +4,5 @@ logs/
 conf/
 record/
 .idea/
+temp/
+web/

@@ -10,6 +10,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (req, res) => {
+    res.redirect('/web/index.html');
+});
+
+app.use('/web', express.static('web'));
 app.use('/api/room', room);
 
 app.listen(7840, () => {
