@@ -1,5 +1,6 @@
 node_modules/
 dist/
 logs/
-database.json
 conf/
+record/
+.idea/
