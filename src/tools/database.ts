@@ -3,7 +3,7 @@ import Logger from "./logger";
 
 const logger = Logger("database");
 
-const db = new JsonDB(new Config("conf/data.json", true, true, '/'));
+const db = new JsonDB(new Config("data/conf/data.json", true, true, '/'));
 
 class Database {
     public async get(path: string, defaultValue: any) {

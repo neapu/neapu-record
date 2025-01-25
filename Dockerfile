@@ -8,8 +8,6 @@ RUN npm install -g n
 
 RUN n stable
 
-RUN apt install ffmpeg -y
-
 RUN npm install typescript -g
 
 ARG USER_UID=1000
@@ -20,15 +18,16 @@ USER record
 
 WORKDIR /app
 
-COPY *.ts *.json /app/
+COPY src /app/src
+COPY scripts /app/scripts
+COPY tsconfig.json /app
+COPY package.json /app
 
-COPY static /app/static
+RUN /bin/bash /app/scripts/build_web.sh
 
-EXPOSE 7001
+EXPOSE 7840
 
 RUN npm install
-
-
 
 RUN tsc
 

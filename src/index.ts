@@ -1,5 +1,10 @@
 import express from 'express';
 import room from './room';
+import fs from 'fs';
+
+if (!fs.existsSync('data')) {
+    fs.mkdirSync('data');
+}
 
 const app = express();
 app.use(express.json());

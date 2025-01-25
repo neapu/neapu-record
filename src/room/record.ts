@@ -11,8 +11,8 @@ export class Record {
     constructor(roomId: number, onFinish: (filename: string) => void) {
         this._roomId = roomId;
         this._onFinish = onFinish;
-        if (!fs.existsSync("record")) {
-            fs.mkdirSync("record");
+        if (!fs.existsSync("data/record")) {
+            fs.mkdirSync("data/record");
         }
         setInterval(() => {
             if (this._recording) {
@@ -115,7 +115,7 @@ export class Record {
             } else if (rsp.headers['content-type'] == 'video/x-flv') {
                 this._filename = `record-${timestamp}.flv`;
             }
-            this._filename = "record/" + this._filename;
+            this._filename = "data/record/" + this._filename;
             this._writer = fs.createWriteStream(this._filename);
             rsp.data.pipe(this._writer);
             return true;

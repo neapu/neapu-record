@@ -145,7 +145,7 @@ export class RoomHandler {
     public async setListenStatus(listening: boolean) {
         this._info.listening = listening;
         if (listening) {
-            await this.startRecord();
+            await this.update();
         } else {
             this.stopRecord();
         }
