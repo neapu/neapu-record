@@ -86,6 +86,13 @@ export class Record {
         return this._filename;
     }
 
+    public stopRecord() {
+        if (this._recording) {
+            this._writer?.end();
+            this._recording = false;
+        }
+    }
+
     private async recordUrl(url: string): Promise<boolean> {
         try {
             const rsp = await axios({

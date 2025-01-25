@@ -132,4 +132,22 @@ export class RoomHandler {
             logger.info(`room: ${this._info.roomId}, start record`);
         }
     }
+
+    public stopRecord() {
+        if (!this._info.recording) {
+            return;
+        }
+        this._record.stopRecord();
+        this._info.recording = false;
+        logger.info(`room: ${this._info.roomId}, stop record`);
+    }
+
+    public async setListenStatus(listening: boolean) {
+        this._info.listening = listening;
+        if (listening) {
+            await this.startRecord();
+        } else {
+            this.stopRecord();
+        }
+    }
 }

@@ -26,4 +26,31 @@ router.post('/addRoom', async (req, res) => {
     });
 });
 
+router.post('/deleteRoom', async (req, res) => {
+    const roomId = req.body.roomId;
+    if (!roomId) {
+        res.status(400).send("Invalid room id");
+        return;
+    }
+    const ret = await roomManager.deleteRoom(roomId);
+    res.send({
+        code: ret === null ? 0 : -1,
+        data: ret ? ret : "success"
+    });
+});
+
+router.post('/setRoomListenStatus', async (req, res) => {
+    const roomId = req.body.roomId;
+    const listening : boolean = req.body.listening;
+    if (roomId === undefined || listening === undefined) {
+        res.status(400).send("Invalid request");
+        return;
+    }
+    const ret = await roomManager.setRoomListenStatus(roomId, listening);
+    res.send({
+        code: ret === null ? 0 : -1,
+        data: ret ? ret : "success"
+    });
+});
+
 export default router;

@@ -49,6 +49,28 @@ class RoomManager {
         await database.set("/rooms", this._rooms.map((room) => room.info));
         return null;
     }
+
+    public async deleteRoom(roomId: number) : Promise<string | null> {
+        for (let i = 0; i < this._rooms.length; i++) {
+            if (this._rooms[i].info.roomId === roomId) {
+                this._rooms[i].stopRecord();
+                this._rooms.splice(i, 1);
+                await database.set("/rooms", this._rooms.map((room) => room.info));
+                return null;
+            }
+        }
+        return "直播间不存在";
+    }
+
+    public async setRoomListenStatus(roomId: number, listening: boolean) : Promise<string | null> {
+        for (const room of this._rooms) {
+            if (room.info.roomId === roomId) {
+                await room.setListenStatus(listening);
+                return null;
+            }
+        }
+        return "直播间不存在";
+    }
 }
 
 const roomManager = new RoomManager();
